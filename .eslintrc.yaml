@@ -1,0 +1,53 @@
+env:
+  browser: true
+  es6: true
+extends:
+  # https://github.com/standard/eslint-config-standard
+  - standard
+
+  # https://github.com/yannickcr/eslint-plugin-react
+  - plugin:react/recommended
+
+  # https://github.com/benmosher/eslint-plugin-import
+  - plugin:import/recommended
+  - plugin:import/react
+  - plugin:import/typescript
+
+  # https://github.com/typescript-eslint/typescript-eslint
+  - plugin:@typescript-eslint/recommended
+
+  # https://github.com/prettier/eslint-config-prettier
+  - prettier
+
+  # https://github.com/prettier/eslint-plugin-prettier
+  - plugin:prettier/recommended
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+parser: "@typescript-eslint/parser"
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 2018
+  sourceType: module
+plugins:
+  - react
+  - react-hooks
+  - "@typescript-eslint"
+  - prettier
+rules:
+  prettier/prettier: warn
+  no-use-before-define: 0  # https://github.com/typescript-eslint/typescript-eslint/issues/2502
+  import/order:  # https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md
+    - "warn"
+    - alphabetize: { order: asc, caseInsensitive: true}
+      newlines-between: always
+      pathGroups:
+      - { pattern: "~/**",  group: "parent" }
+  import/no-unresolved: 0
+  "@typescript-eslint/explicit-module-boundary-types": [1, { allowedNames: [render] }]
+  "react-hooks/rules-of-hooks": "error" # https://reactjs.org/docs/hooks-rules.html
+  "react-hooks/exhaustive-deps": "warn"
+settings:
+  react:
+    version: detect
